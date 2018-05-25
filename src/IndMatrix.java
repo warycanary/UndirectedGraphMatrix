@@ -1,10 +1,6 @@
 import java.io.*;
 import java.util.*;
 
-/**
- * Skeleton code by Jeffrey Chan, 2016.
- * Implementation by Sean Martin 2018
- */
 public class IndMatrix<T> extends Matrix<T> {
 	
 	/* Adds a new row to each edge column */

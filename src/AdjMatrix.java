@@ -1,11 +1,6 @@
 import java.io.*;
 import java.util.*;
 
-/**
- * Adjacency matrix implementation for the FriendshipGraph interface.
- * Skeleton code by Jeffrey Chan, 2016.
- * Implementation by Sean Martin 2018
- */
 public class AdjMatrix<T> extends Matrix<T> {
 	
 	/* Expands the ArrayList matrix when a new vertex is added */
