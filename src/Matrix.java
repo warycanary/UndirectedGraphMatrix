@@ -2,7 +2,7 @@ import java.util.*;
 
 public abstract class Matrix<T> {
 	
-	protected final int disconnectedDist = -1, doesNotExist = -1;
+	final int disconnectedDist = -1, doesNotExist = -1;
 	
 	/* 2D ArrayList of Integers representing an adjacency matrix */
 	List<List<Integer>> matrix;
@@ -15,6 +15,7 @@ public abstract class Matrix<T> {
 		matrix = new ArrayList<>();
 	}
 	
+
 	/* Adds a vertex to vertex collection and expands the matrix */
 	public void addVertex(T vertLabel) {
 		
