@@ -110,7 +110,7 @@ public class IndMatrix<T> extends Matrix<T> {
 			for (List<Integer> column : matrix) {
 				column.remove(vertIndex);
 			}
-			/* Remove vertex from vertex HashMap */
+			/* Remove vertex from vertex collection */
 			vertices.remove(vertLabel);
 			
 		} else {

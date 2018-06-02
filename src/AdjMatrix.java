@@ -77,7 +77,7 @@ public class AdjMatrix<T> extends Matrix<T> {
 			}
 			/* Remove matrix column */
 			matrix.remove(vertIndex);
-			/* Remove from vertex HashMap */
+			/* Remove from vertex collection */
 			vertices.remove(vertLabel);
 		} else {
 			System.err.println("Error: Can not remove vertex. Vertex does not exist.");

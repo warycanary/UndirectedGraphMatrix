@@ -7,7 +7,7 @@ public abstract class Matrix<T> {
 	/* 2D ArrayList of Integers representing an adjacency matrix */
 	List<List<Integer>> matrix;
 	
-	/* HashMap for storing keys of vertices */
+	/* Collection for storing vertices */
 	List<T> vertices;
 	
 	public Matrix() {
@@ -15,7 +15,7 @@ public abstract class Matrix<T> {
 		matrix = new ArrayList<>();
 	}
 	
-	/* Adds a vertex to vertex HashMap and expands the matrix */
+	/* Adds a vertex to vertex collection and expands the matrix */
 	public void addVertex(T vertLabel) {
 		
 		final int vertIndex = getVertexIndex(vertLabel);
