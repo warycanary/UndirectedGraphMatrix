@@ -70,7 +70,7 @@ public class AdjMatrix<T> extends Matrix<T> {
 				row.remove(vertIndex);
 			}
 			/* Remove matrix column */
-			matrix.remove(vertIndex);
+			matrix.remove((int) vertIndex);
 
 			/* Remove from vertex collection */
 			vertices.remove(vertLabel);
