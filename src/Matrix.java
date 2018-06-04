@@ -2,11 +2,10 @@ import java.util.*;
 
 public abstract class Matrix<T> {
 	
-	final int disconnectedDist = -1;
+	private final int disconnectedDist = -1;
 	
-	/* 2D ArrayList of Integers representing an adjacency matrix */
+	/* 2D ArrayList of Integers representing a matrix */
 	List<List<Integer>> matrix;
-	
 	/* Map of vertices */
 	VertexMap<T, Integer> vertices;
 	
@@ -35,7 +34,7 @@ public abstract class Matrix<T> {
 	}
 	
 	/* Calculates the shortest path between to vertices */
-	public int shortestPathDistance(T vertLabel1, T vertLabel2) {
+	public int shortestPath(T vertLabel1, T vertLabel2) {
 		final Integer vertIndex1 = vertices.get(vertLabel1);
 		final Integer vertIndex2 = vertices.get(vertLabel2);
 		
@@ -53,7 +52,6 @@ public abstract class Matrix<T> {
 			
 			/* Loops until queue is empty */
 			while (queue.size() > 0) {
-				
 				/* If destination is found in the queue, calculate the path */
 				if (queue.contains(vertLabel2)) {
 					return shortestPath(vertLabel1, vertLabel2, parents);
@@ -74,7 +72,7 @@ public abstract class Matrix<T> {
 	}
 	
 	/* Adds neighbours of the current vertex to the queue and sets their parents */
-	public void updateQueue(T vertex, Integer vertIndex, Queue<T> queue, List<T> parents) {
+	private void updateQueue(T vertex, Integer vertIndex, Queue<T> queue, List<T> parents) {
 		/* For all neighbours of the current vertex */
 		for (T neighbour : neighbours(vertIndex)) {
 			final int neighIndex = vertices.get(neighbour);
@@ -89,20 +87,12 @@ public abstract class Matrix<T> {
 	
 	/* Traverses the parents array and calculates the shortest path */
 	private int shortestPath(T source, T current, List<T> parents) {
-		try {
-			
-			int path = 0;
-			while (!current.equals(source)) {
-				current = parents.get(vertices.get(current));
-				path++;
-			}
-			return path;
-			
-		} catch (Exception e) {
-			System.err.println("Something went terribly wrong");
-			e.printStackTrace();
+		int path = 0;
+		while (!current.equals(source)) {
+			current = parents.get(vertices.get(current));
+			path++;
 		}
-		return -1;
+		return path;
 	}
 	
 	public int getEdgeCount() {
