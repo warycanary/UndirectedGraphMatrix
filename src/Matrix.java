@@ -54,7 +54,7 @@ public abstract class Matrix<T> {
 			while (queue.size() > 0) {
 				/* If destination is found in the queue, calculate the path */
 				if (queue.contains(vertLabel2)) {
-					return shortestPath(vertLabel1, vertLabel2, parents);
+					return calculatePath(vertLabel1, vertLabel2, parents);
 				}
 				/* Remove the current vertex from the queue, find neighbours and update queue */
 				T vertex = queue.poll();
@@ -86,7 +86,7 @@ public abstract class Matrix<T> {
 	}
 	
 	/* Traverses the parents array and calculates the shortest path */
-	private int shortestPath(T source, T current, List<T> parents) {
+	private int calculatePath(T source, T current, List<T> parents) {
 		int path = 0;
 		while (!current.equals(source)) {
 			current = parents.get(vertices.get(current));
