@@ -19,105 +19,94 @@ public class AdjMatrix<T> extends Matrix<T> {
 	
 	/* Adds a new edge to the matrix */
 	public void addEdge(T srcLabel, T tarLabel) {
-		final Integer srcIndex = vertices.get(srcLabel);
-		final Integer tarIndex = vertices.get(tarLabel);
+		final int srcIndex = vertices.indexOf(srcLabel);
+		final int tarIndex = vertices.indexOf(tarLabel);
 		
 		/* Checks if the vertices provided are the same. */
 		if (srcLabel.equals(tarLabel)) {
-			System.err.println("Error: Can not add edge. A vertex can not have"
-					+ " an edge with itself.");
+			System.err.println(ErrorMessages.values()[4]);
 		/* Checks if vertices exist */
-		} else if (srcIndex != null  && tarIndex != null) {
+		} else if (srcIndex != doesNotExist  && tarIndex != doesNotExist) {
 			/* Checks if edge does not exist then sets edge */
 			if (matrix.get(srcIndex).get(tarIndex).equals(0)
 			&& matrix.get(tarIndex).get(srcIndex).equals(0)) {
 				matrix.get(srcIndex).set(tarIndex, 1);
 				matrix.get(tarIndex).set(srcIndex, 1);
 			} else {
-				System.err.println("Error: Can not add edge. Edge already exists.");
+				System.err.println(ErrorMessages.values()[3]);
 			}
 		} else {
-			System.err.println("Error: Can not add edge. Vertex does not exist.");
+			System.err.println(ErrorMessages.values()[2]);
 		}
 	}
 	
 	/* Returns an ArrayList of T object neighbours for a given T object */
-	public List<T> neighbours(Integer vertIndex) {
-		ArrayList<T> neighbours = new ArrayList<>();
+	public List<T> neighbours(int vertIndex) {
+		List<T> neighbours = new ArrayList<>();
 		
 		/* Checks if vertex exists */
-		if (vertIndex != null) {
+		if (vertIndex != doesNotExist) {
 			/* If an edge exists, add neighbours to the neighbours array */
 			for (int i = 0; i < matrix.get(vertIndex).size(); i++) {
 				if (matrix.get(vertIndex).get(i).equals(1)) {
-					neighbours.add(vertices.getVertex(i));
+					neighbours.add(vertices.get(i));
 				}
 			}
 		} else {
-			System.err.println("Error: Can not search neighbours. Vertex does not exist.");
+			System.err.println(ErrorMessages.values()[8]);
 		}
 		return neighbours;
 	}
 	
 	/* Removes a vertex and associated edges (Deletes array positions) */
 	public void removeVertex(T vertLabel) {
-		final Integer vertIndex = vertices.get(vertLabel);
+		final int vertIndex = vertices.indexOf(vertLabel);
 		
 		/* Checks if vertex exists */
-		if (vertIndex != null) {
+		if (vertIndex != doesNotExist) {
 			/* Remove matrix rows */
 			for (List<Integer> row : matrix) {
 				row.remove(vertIndex);
 			}
 			/* Remove matrix column */
-			matrix.remove((int) vertIndex);
+			matrix.remove(vertIndex);
 
 			/* Remove from vertex collection */
 			vertices.remove(vertLabel);
 		} else {
-			System.err.println("Error: Can not remove vertex. Vertex does not exist.");
+			System.err.println(ErrorMessages.values()[1]);
 		}
 	}
 	
 	/* Sets edge values in edges matrix to 0 */
 	public void removeEdge(T srcLabel, T tarLabel) {
-		final Integer srcIndex = vertices.get(srcLabel);
-		final Integer tarIndex = vertices.get(tarLabel);
+		final int srcIndex = vertices.indexOf(srcLabel);
+		final int tarIndex = vertices.indexOf(tarLabel);
 		
 		/* Checks if the vertices provided are the same. */
 		if (srcLabel.equals(tarLabel)) {
-			System.err.println("Error: Can not remove edge. A vertex can not have"
-					+ " an edge with itself.");
+			System.err.println(ErrorMessages.values()[7]);
 		/* Checks if vertices are valid */
-		} else if (srcIndex != null && tarIndex != null) {
+		} else if (srcIndex != doesNotExist && tarIndex != doesNotExist) {
 			/* Checks if edge exists */
 			if (matrix.get(srcIndex).get(tarIndex).equals(1)
 			&& matrix.get(tarIndex).get(srcIndex).equals(1)) {
 				matrix.get(srcIndex).set(tarIndex, 0);
 				matrix.get(tarIndex).set(srcIndex, 0);
 			} else {
-				System.err.println("Error: Can not remove edge. Edge does not exist.");
+				System.err.println(ErrorMessages.values()[6]);
 			}
 		} else {
-			System.err.println("Error: Can not remove edge. Vertex does not exist.");
+			System.err.println(ErrorMessages.values()[5]);
 		}
-	}
-	
-	/* Prints a formatted list of VertexCollection */
-	public void printVertices(PrintWriter os) {
-		for (T print : vertices.keySet()) {
-			os.printf("%s ", print.toString());
-		}
-		System.out.println();
-		os.flush();
 	}
 	
 	/* Prints a formatted list of edges */
-	public void printEdges(PrintWriter os) {
+	public void printEdges(PrintStream os) {
 		for (int i = 0; i < matrix.size(); i++) {
 			for (int j = 0; j < matrix.get(i).size(); j++) {
 				if (matrix.get(i).get(j).equals(1)) {
-					os.printf("%s %s\n", vertices.getVertex(i), vertices.getVertex(j));
+					os.printf("%s %s\n", vertices.get(i), vertices.get(j));
 				}
 			}
 		}
